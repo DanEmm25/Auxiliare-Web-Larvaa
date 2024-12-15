@@ -22,6 +22,21 @@ Route::get('/pricing', function () {
     return view('pricing');
 });
 
+use App\Http\Controllers\MessagingController;
+
+use App\Http\Controllers\ChatController;
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/chat', [ChatController::class, 'index'])->name('chat.index'); // List conversations
+    Route::get('/chat/{receiverId}', [ChatController::class, 'show'])->name('chat.show'); // View a specific chat
+    Route::post('/chat/message', [ChatController::class, 'store'])->name('chat.store'); // Send a message
+    Route::post('/chat/start/{userId}', [ChatController::class, 'start'])->name('chat.start'); // Start a new chat
+});
+
+
+
+
+
 // Auth routes
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('login.submit');

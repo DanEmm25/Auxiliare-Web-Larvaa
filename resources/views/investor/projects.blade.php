@@ -5,7 +5,6 @@
 @section('additional_css')
 <link rel="stylesheet" href="{{ asset('css/investor/projects.css') }}">
 <link rel="stylesheet" href="{{ asset('css/entrepreneur/home.css') }}">
-
 @endsection
 
 @section('content')
@@ -98,8 +97,8 @@
                         <span class="name">{{ $project->user->firstname }} {{ $project->user->lastname }}</span>
                         <span class="role">Project Lead</span>
                     </div>
-                    <button class="contact-btn" title="Contact Entrepreneur">
-                        <i class="fas fa-envelope"></i>
+                    <button class="contact-btn" title="Contact Entrepreneur" onclick="window.location.href='/chat/{{ $project->user->id }}'">
+                      <i class="fas fa-envelope"></i>
                     </button>
                 </div>
 
@@ -159,7 +158,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     const filterButtons = document.querySelectorAll('.category-filter');
     const projectsGrid = document.querySelector('.projects-grid');
-    const statsContent = document.querySelector('.stats-category');
     
     filterButtons.forEach(button => {
         button.addEventListener('click', async function() {
